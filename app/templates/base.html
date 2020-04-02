@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+   <link href="{{ url_for('static', filename='css/bootstrap-4.3.1.min.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/fontawesome.min.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/solid.min.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/bootstrap-datepicker.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/jquery.datetimepicker.min.css') }}" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='css/bootstrap-table.min.css') }}" rel="stylesheet" />
+   <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+</head>
+
+<body>
+   <div class="wrapper">
+      <div id="content">
+         {% include 'sidebar.html' %}
+         <div id="page_content">
+            <div class="container-fluid content-row">
+               <div class="row">
+                  <div class="col col-sm-12">
+                     <div class="card pb-0">
+                        <div class="card-body top_banner">
+                           <button type="button" id="sidebarCollapse" class="btn btn-info">
+                              <i class="fas fa-align-left"></i>
+                           </button>
+                           {% if current_user.is_authenticated %}
+                           <div class="float-right">
+                              <div class="btn-group dropleft">
+                                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <font color="white">{{ current_user.username }}</font>
+                                 </button>
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" style="background-color: #e3e4e6" href="#">Change
+                                       Password</a>
+                                    <a class="dropdown-item" style="background-color: #e3e4e6"
+                                       href="{{ url_for('auth.logout') }}">Log Out</a>
+                                    {% if not disable_button(['Master']) %}
+                                    <a class="dropdown-item" style="background-color: #e3e4e6"
+                                       href="#">Admin Panel</a>
+                                    {% endif %}
+                                 </div>
+                              </div>
+                           </div>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% block content %}{% include 'home/homepage.html' %}{% endblock %}
+         </div>
+      </div>
+   </div>
+   <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/fontawesome.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/solid.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/bootstrap-4.3.1.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/bootstrap-table.min.js') }}"></script>
+   <script type="text/javascript">
+      $(document).ready(function () {
+         $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+         });
+      });
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+      <link href="{{ url_for('static', filename='css/bootstrap-4.3.1.min.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/responsive.dataTables.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/login_page.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/fontawesome.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/solid.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/select2.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/bootstrap-datepicker.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='css/jquery.datetimepicker.min.css') }}" rel="stylesheet" />
+      <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+   </head>
+   <body>
+         <div class="container">
+            <div class="d-flex justify-content-center h-100">
+               <div class="card">
+                  <div class="card-body">
+                     <form method="post" action="{{ url_for('auth.login') }}" name="login_form" id="login_form">
+					 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-user"></i></span>
+                           </div>
+                           <input type="text" name="username" class="form-control" placeholder="username">
+                        </div>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-key"></i></span>
+                           </div>
+                           <input type="password" name="password" class="form-control" placeholder="password">
+                        </div>
+                        <div class="row justify-content-md-center">
+                           <input type="submit" value="Login" class="btn btn-success" style="width: 60%">
+                     </form>
+                     </div>
+                     <div class="row justify-content-md-center">
+                        <a href="{{ url_for('auth.request_access') }}" class="btn btn-warning" style="width: 60%">Request Access</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/fontawesome.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/solid.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/bootstrap-4.3.1.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/dataTables.responsive.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/dataTables.fixedColumns.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+		 <script>
+   $("#login_form").submit(function(e) {
+       e.preventDefault();
+       var form = $(this);
+       var url = form.attr('action');
+    
+       $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(),
+           context: form,
+           success: function(resp) {
+		      if (resp['outcome'] == 'error') {
+			      alert(resp['message']);
+			  }
+              else {
+			     window.location.href = "{{ url_for('home.homepage') }}";
+			  }
+           }
+       });
+   });
+</script>
+   </body>
+</html>

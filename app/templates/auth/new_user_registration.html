@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid content-row">
+   <div class="row">
+      <div class="col col-sm-12">
+         <div class="card pb-0 h-100" style="border-color: #394a59">
+            <div class="card-header">
+               <center>
+                  <h5>Request Access</h5>
+               </center>
+            </div>
+            <div class="card-body">
+               <form method="post" action="{{ url_for('auth.handle_access_request') }}" autocomplete="off" id="new_user_request_form">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <div class="form-group">
+                     <div class="row">
+                        <label class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                           <input type="text" class="form-control" name="username" value="" >
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="row">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                           <input type="password" class="form-control" name="password_1" value="">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="row">
+                        <label class="col-sm-2 control-label">Repeat Password</label>
+                        <div class="col-sm-10">
+                           <input type="password" class="form-control" name="password_2" value="">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <center><div id="registration_feedback_div"></div></center>
+                        <input type="submit" class="btn btn-primary" style="width: 100%;" value="Send Request">
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   $("#new_user_request_form").submit(function(e) {
+       e.preventDefault();
+       var form = $(this);
+       var url = form.attr('action');
+    
+       $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(),
+           context: form,
+           success: function(resp) {
+               $("#registration_feedback_div").html(resp);	
+           }
+       });
+   });
+</script>
+{% endblock %}

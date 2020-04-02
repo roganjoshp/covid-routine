@@ -1,0 +1,84 @@
+<style>
+.scrollable-menu {
+    height: auto;
+    max-height: 560px;
+    overflow-x: hidden;
+}
+</style>
+
+<nav id="sidebar">
+   <ul class="list-unstyled components scrollable-menu">
+   {% if current_user.is_authenticated %}
+   <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+   
+      <li>
+         <a href="{{ url_for('home.homepage') }}">Home</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+      <li>
+         <a href="#">Analysis</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+      <li>
+         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="#">Departments</a>
+         <ul class="collapse list-unstyled" id="pageSubmenu">
+            
+         </ul>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+      <li>
+         <a href="#">Planning</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+	  <li>
+         <a href="#">Bagging</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+	  <li>
+         <a href="#">Fastfield</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+	  <!--<li>
+         <a href="#">Maintenance</a>
+      </li>-->
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+	  <!--
+	  <li>
+         <a href="#">Migration</a>
+      </li>
+	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
+	  <li>
+         <a href="#">Forecast</a>
+      </li>
+	  -->
+   </ul>
+   {% endif %}
+</nav>
+<script>
+function get_dept_list(){
+    
+	var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+	
+	$.ajax({
+       type: 'POST',
+       data: JSON.stringify({}),
+       contentType: 'application/json; charset=utf-8',
+       url: "#",
+       success: function(data) {
+	   console.log(data);
+           $("#pageSubmenu").empty();
+           for (var i = 0; i < data.length; i++) {
+               $("#pageSubmenu").append('<a href="/departments/' + data[i].id + '">' + data[i].name + '</a>');
+           }
+       }
+   });
+}
+</script>
