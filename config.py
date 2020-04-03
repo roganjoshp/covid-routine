@@ -9,7 +9,9 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    # Alternatively fall back to uuid.uuid4() for a secret key but this will 
+    # invalidate sessions during development on every server restart - annoying
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'some_secret_key')
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_TYPE = 'sqlalchemy'
@@ -25,8 +27,10 @@ class Config:
                                                             pw=POSTGRES_PW,
                                                             url=POSTGRES_URL,
                                                             db=POSTGRES_DB)
-
-    SQLALCHEMY_DATABASE_URI = DB_URL
+    
+    # The hope is to use a postgres instance, but fall back to sqlite if need be
+    SQLALCHEMY_DATABASE_URI = (DB_URL if POSTGRES_DB is not None else 
+                               'sqlite:///' + os.path.join(basedir, 'app.db'))
     
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     PERMANENT_SESSION_LIFETIME = 604800
