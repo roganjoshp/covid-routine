@@ -34,3 +34,8 @@ export FLASK_APP=main_app.py
 export FLASK_DEBUG=1
 flask run
 ```
+
+## Logging in to the app ##
+When first launching the app, a check will be made to see if there are any registered users in the database. 
+If not, a default will be created with the username "default" and password "deleteme". 
+This user will have full admin privileges (once implemented) in order to create a new administrator. 
