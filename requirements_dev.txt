@@ -1,0 +1,8 @@
+pytest==5.4.1
+
+# Running tests on Travis
+coverage==5.0.4
+coveralls==1.11.1
+mypy==0.770
+pytest-cov==2.8.1
+pytest-mypy==0.6.0
