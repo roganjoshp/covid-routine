@@ -4,6 +4,16 @@ import re
 WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 
             'Sunday']
 
+
+day_dict = {0: 'Monday',
+            1: 'Tuesday',
+            2: 'Wednesday',
+            3: 'Thursday',
+            4: 'Friday', 
+            5: 'Saturday',
+            6: 'Sunday'}
+
+
 def atoi(text):
     return int(text) if text.isdigit() else text
 
@@ -12,19 +22,14 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split('(\d+)', text) ]
 
 
-def parse_shift_time(day, timestamp):
-    day_comp = day * 1440
-    hour, minute = timestamp.split(':')
-    hour_comp = int(hour) * 60
-    minute_comp = int(minute)
-    return day_comp + hour_comp + minute_comp
-
-
-def shift_timestamp_to_human(timestamp):
-    day_number = timestamp // 1440
-    day = WEEKDAYS[day_number]
-    remaining = timestamp - (day_number * 1440)
-    hours = int(remaining / 60)
-    minutes = remaining - (hours * 60)
-    return {'day': day,
-            'time': str(hours).zfill(2) + ':' + str(minutes).zfill(2)}
+def handle_ajax_error(msg_dict):
+    
+    if msg_dict['status']:
+        msg_dict['message'] = '<font style="color: green">{}</font>'.format(
+                                                             msg_dict['message']
+                                                             )
+    else:
+        msg_dict['message'] = '<font style="color: red">{}</font>'.format(
+                                                             msg_dict['message']
+                                                             )
+    return msg_dict

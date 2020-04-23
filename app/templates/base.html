@@ -23,15 +23,15 @@
             <div class="container-fluid content-row">
                <div class="row">
                   <div class="col col-sm-12">
-                     <div class="card pb-0">
-                        <div class="card-body top_banner">
-                           <button type="button" id="sidebarCollapse" class="btn btn-info">
+                     <div class="card pb-2 mb-2 pt-2 pl-2 pr-2">
+                        <div class="top_banner">
+                           <button type="button" id="sidebarCollapse" class="btn btn-info btn-sm">
                               <i class="fas fa-align-left"></i>
                            </button>
                            {% if current_user.is_authenticated %}
                            <div class="float-right">
                               <div class="btn-group dropleft">
-                                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                 <button type="button" class="btn btn-primary dropdown-toggle btn-sm"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <font color="white">{{ current_user.username }}</font>
                                  </button>
