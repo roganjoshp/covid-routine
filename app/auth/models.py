@@ -77,7 +77,6 @@ class Users(UserMixin, db.Model):
     username = db.Column(db.String(40), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     is_authorised = db.Column(db.Boolean)
-    is_icu_trained = db.Column(db.Boolean)
     
     access_groups = db.relationship(
                         'PermissionGroups', secondary=user_permissions,

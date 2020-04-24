@@ -6,12 +6,12 @@ from flask_session import Session, SqlAlchemySessionInterface
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
-from sqlalchemy import MetaData
-
 from config import Config
 
 import os
 import platform
+
+from sqlalchemy import MetaData
 
 # This is required for redirects to work when behind NGinX
 from werkzeug.contrib.fixers import ProxyFix
@@ -51,7 +51,7 @@ def create_app():
     
     app = Flask(__name__)
     app.config.from_object(Config)
-    print(app.config)
+    
     if platform.system() != 'Windows':
         app.wsgi_app = ProxyFix(app.wsgi_app)
     

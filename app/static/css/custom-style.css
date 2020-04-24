@@ -1,7 +1,3 @@
-/*
-    DEMO STYLE
-*/
-
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
@@ -59,7 +55,10 @@ a:focus {
   padding-top: 8 !important;
   padding-bottom: 0 !important;
   background-color: #C3CBD1;
+}
 
+.card-body {
+  border-color: #394a59;	
 }
 
 .modal-header {
@@ -68,7 +67,6 @@ a:focus {
   background-color: #C3CBD1;
 
 }
-
 
 
 /* ---------------------------------------------------
@@ -219,10 +217,6 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
-}
-
-.leaflet-control-container .leaflet-routing-container-hide {
-    display: none;
 }
 
 .row {

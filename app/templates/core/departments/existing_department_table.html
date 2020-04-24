@@ -1,0 +1,16 @@
+<table class="table table-sm table-bordered" style="width: 100%">
+    <thead>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department.name }}</td>
+            <td><button class="btn btn-sm btn-primary">Edit</button></td>
+            <td><button class="btn btn-sm btn-danger">Delete</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

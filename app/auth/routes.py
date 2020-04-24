@@ -16,7 +16,7 @@ def create_default_user():
     permission. This user can then be used to create another moderator user and
     can then be deleted
     """
-    
+
     users = Users.query.all()
     if not users:
         default_user = Users(username='default')
@@ -32,7 +32,6 @@ def login():
         return redirect(url_for('home.homepage'))
     
     if request.method == 'GET':
-        print("fired")
         create_default_user()
         return render_template('auth/login.html')
         

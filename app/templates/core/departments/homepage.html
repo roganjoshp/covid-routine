@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% include 'navbars/core_nav.html' %}
+<div class="container-fluid content-row">
+   <div class="row">
+      <div class="col col-sm-6">
+         <div class="card pb-0 h-100">
+            <div class="card-header">
+               <h5>Existing Departments</h5>
+            </div>
+            <div class="card-body">
+               {% include 'core/departments/existing_department_table.html' %}
+            </div>
+         </div>
+      </div>
+      <div class="col col-sm-6">
+         <div class="card pb-0 h-100">
+            <div class="card-header">
+               <h5>Create Department</h5>
+            </div>
+            <div class="card-body">
+               Something
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
