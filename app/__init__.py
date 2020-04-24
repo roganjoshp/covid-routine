@@ -28,7 +28,7 @@ naming_convention = {
 
 
 csrf = CSRFProtect()
-db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
+db: SQLAlchemy = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 session = Session()
 login = LoginManager()
