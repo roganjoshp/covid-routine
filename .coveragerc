@@ -1,0 +1,11 @@
+[run]
+
+include = /home/travis/build/roganjosh/covid-routine/*
+
+# Generally ignore config/env/test files as part of coverage calculation.
+omit =
+     *.yml
+     *.md
+     tests/*
+     venv/*
+     *_env/*
