@@ -1,4 +1,4 @@
-<table class="table table-sm table-bordered" style="width: 100%">
+<table class="table table-sm table-bordered" style="width: 100%" id="existing_departments_table">
     <thead>
         <th>Name</th>
         <th></th>
@@ -7,10 +7,32 @@
     <tbody>
         {% for department in departments %}
         <tr>
-            <td>{{ department.name }}</td>
-            <td><button class="btn btn-sm btn-primary">Edit</button></td>
-            <td><button class="btn btn-sm btn-danger">Delete</button></td>
+            <td><b>{{ department.name }}</b></td>
+            <td><button class="btn btn-sm btn-primary" style="width: 100%">Edit</button></td>
+        <td><button class="btn btn-sm btn-danger" style="width: 100%" onclick="delete_department('{{ department.id }}')">Delete</button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function () {
+        $('#existing_departments_table').DataTable({
+            "iDisplayLength": 10,
+            "bLengthChange": false,
+            "aaSorting": [],
+            "searching": false,
+            "info": false,
+            "responsive": true,
+            "columnDefs": [{
+                targets: 1,
+                className: 'dt-body-center'
+            },
+            {
+                targets: 2,
+                className: 'dt-body-center'
+            }
+            ]
+        });
+    });
+</script>

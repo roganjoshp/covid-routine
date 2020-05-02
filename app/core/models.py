@@ -25,7 +25,7 @@ class Departments(db.Model):
 
     @staticmethod
     def create_new(name):
-        exists = Departments.query.filter_by(name=name).all()
+        exists = Departments.query.filter_by(name=name).first()
         if exists is not None:
             return {'status': False,
                     'message': 'Department name already exists'}

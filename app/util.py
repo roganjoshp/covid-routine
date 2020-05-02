@@ -22,14 +22,12 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 
-def handle_ajax_error(msg_dict):
+def format_ajax_message(msg_dict):
     
     if msg_dict['status']:
-        msg_dict['message'] = '<font style="color: green">{}</font>'.format(
-                                                             msg_dict['message']
-                                                             )
+        msg_dict['message'] = ('<br><center><font style="color: green">{}'
+                               '</font></center>').format(msg_dict['message'])
     else:
-        msg_dict['message'] = '<font style="color: red">{}</font>'.format(
-                                                             msg_dict['message']
-                                                             )
+        msg_dict['message'] = ('<br><center><font style="color: red">{}'
+                               '</font></center>').format(msg_dict['message'])
     return msg_dict

@@ -3,7 +3,7 @@ from flask import request, jsonify, render_template, redirect, url_for
 from app import db
 
 from app.core import bp
-from app.util import handle_ajax_error
+from app.util import format_ajax_message
 
 from app.auth.models import group_required
 from app.core.models import Departments
@@ -30,12 +30,16 @@ def departments_home():
 def create_department():
     
     req = request.form.to_dict()
-    dept_name = req.get('department_name')
-    rtn = {}
+    dept_name = req.get('new_department_name')
     
     if not dept_name:
         rtn= {'status': False,
-              'message': 'No department name specified'}
+              'message': 'No department name specified',
+              'template': render_template(
+                              'core/departments/existing_department_table.html',
+                              departments=Departments.get_all())
+              }
+        return jsonify(format_ajax_meassage(rtn))
     
     try:
         rtn = Departments.create_new(dept_name)
@@ -43,6 +47,25 @@ def create_department():
         rtn = {'status': False,
                'message': 'Unknown exception occurred'}
     
-    rtn = handle_ajax_error(rtn)
+    rtn['template'] = render_template(
+                              'core/departments/existing_department_table.html',
+                              departments=Departments.get_all()
+                             )
     
-    return jsonify(rtn)
+    return jsonify(format_ajax_message(rtn))
+
+
+@bp.route('/delete_department', methods=['POST'])
+@login_required
+def delete_department():
+    
+    req = request.json
+    department_id = int(req.get('department_id', 0))
+    print("department_id", department_id)
+    department = Departments.query.get(department_id)
+    if department is not None:
+        db.session.delete(department)
+        db.session.commit()
+    
+    return render_template('core/departments/existing_department_table.html',
+                            departments=Departments.get_all())
