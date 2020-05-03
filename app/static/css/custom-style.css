@@ -38,23 +38,11 @@ a:focus {
     margin: 10px 0;
 }
 
-.line_mini {
-	width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 5px 0;
-}
-
-.top_banner {
-  padding-top: 8 !important;
-  padding-bottom: 8 !important;
-  background: #394a59;
-}
-
 .card-header {
   padding-top: 8 !important;
   padding-bottom: 0 !important;
   background-color: #C3CBD1;
+
 }
 
 .card-body {
@@ -67,7 +55,6 @@ a:focus {
   background-color: #C3CBD1;
 
 }
-
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
