@@ -23,6 +23,7 @@ class Departments(db.Model):
         depts = Departments.query.order_by('name').all()
         return depts
 
+
     @staticmethod
     def create_new(name):
         exists = Departments.query.filter_by(name=name).first()

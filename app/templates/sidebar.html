@@ -20,7 +20,7 @@
       </li>
 	  <hr color="white" style="margin-top: 2px; margin-bottom: 2px"></hr>
       <li>
-         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="#">Departments</a>
+         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onclick="get_dept_list()">Departments</a>
          <ul class="collapse list-unstyled" id="pageSubmenu">
             
          </ul>
@@ -49,9 +49,8 @@ function get_dept_list(){
        type: 'POST',
        data: JSON.stringify({}),
        contentType: 'application/json; charset=utf-8',
-       url: "#",
+       url: "{{ url_for('core.get_department_list') }}",
        success: function(data) {
-	   console.log(data);
            $("#pageSubmenu").empty();
            for (var i = 0; i < data.length; i++) {
                $("#pageSubmenu").append('<a href="/departments/' + data[i].id + '">' + data[i].name + '</a>');

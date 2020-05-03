@@ -17,6 +17,20 @@ def homepage():
     return render_template('core/homepage.html')
 
 
+@bp.route('/get_department_list', methods=['POST'])
+@login_required
+def get_department_list():
+    
+    departments = Departments.get_all()
+    department_list = []
+    for dept in departments:
+        dept_dict = dept.__dict__
+        del dept_dict['_sa_instance_state']
+        department_list.append(dept_dict)
+    
+    return jsonify(department_list)
+
+
 @bp.route('/departments', methods=['GET'])
 @login_required
 def departments_home():
