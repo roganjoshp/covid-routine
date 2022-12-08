@@ -1,6 +1,6 @@
 alembic==1.4.2
 astroid==2.3.3
-certifi==2019.11.28
+certifi==2022.12.7
 click==7.1.1
 colorama==0.4.3
 Flask==1.1.1
